@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1056939777168",
+    "firebase_url": "https://skripsi-6f26d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "skripsi-6f26d",
+    "storage_bucket": "skripsi-6f26d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056939777168:android:b758286a94d781c18f4c15",
+        "android_client_info": {
+          "package_name": "com.example.flutter_sendi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056939777168-iuuf2dnp83cg86v6ifk4vnh9hc4sei5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKvH9MhzXIoE90KxCvLGhtGIAheyTLjgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056939777168-iuuf2dnp83cg86v6ifk4vnh9hc4sei5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056939777168:android:d6e7d303f221533f8f4c15",
+        "android_client_info": {
+          "package_name": "com.example.kontroler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056939777168-iuuf2dnp83cg86v6ifk4vnh9hc4sei5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKvH9MhzXIoE90KxCvLGhtGIAheyTLjgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056939777168-iuuf2dnp83cg86v6ifk4vnh9hc4sei5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

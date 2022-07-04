@@ -1,0 +1,86 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import '../view/login.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../widgets/state_home/success.dart';
+import '../widgets/state_home/error.dart';
+import '../widgets/state_home/loading.dart';
+
+// ignore_for_file: use_build_context_synchronously
+class Home extends StatelessWidget {
+  final String id, mac;
+  const Home({super.key, required this.id, required this.mac});
+  @override
+  Widget build(BuildContext context) {
+    FirebaseDatabase database = FirebaseDatabase.instance;
+    DatabaseReference starCountRef = database.ref();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // String? isLogin = box.read('isLogin');
+
+    return Scaffold(
+      appBar: AppBar(
+        // leading:
+        title: const Text("Kontroler"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+            ),
+            onPressed: () async {
+              await firestore.collection('mac').doc(id).update(
+                {
+                  "isLogin": false,
+                },
+              );
+              var box = GetStorage();
+              box.remove(
+                'isLogin',
+              );
+              box.remove(
+                'isAdmin',
+              );
+              box.remove(
+                'mac',
+              );
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Login(),
+                ),
+                (Route<dynamic> route) => false,
+              );
+            },
+          ),
+        ],
+      ),
+      body: StreamBuilder<DatabaseEvent>(
+        stream: starCountRef.onValue,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Loading();
+          } else if (snapshot.connectionState == ConnectionState.active ||
+              snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return const Error();
+            } else if (snapshot.hasData) {
+              var data = snapshot.data?.snapshot.value as Map;
+              return Sucess(
+                data: data,
+                starCountRef: starCountRef,
+                id: mac,
+              );
+            } else {
+              return const Text('Empty data');
+            }
+          } else {
+            return Text('State: ${snapshot.connectionState}');
+          }
+        },
+      ),
+    );
+  }
+}
