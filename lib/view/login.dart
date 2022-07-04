@@ -19,25 +19,33 @@ class Login extends StatelessWidget {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: firestore.collection('mac').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
-          } else if (snapshot.connectionState == ConnectionState.active ||
-              snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return const Error();
-            } else if (snapshot.hasData) {
-              var listData = snapshot.data!.docs;
-              return LoginSuccess(listData: listData, firestore: firestore);
-              // return Admin(listData: listData, firestore: firestore);
-            } else {
-              return const Text('Empty data');
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: firestore.collection('mac').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Loading();
+            } else if (snapshot.connectionState == ConnectionState.active ||
+                snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Error();
+              } else if (snapshot.hasData) {
+                var listData = snapshot.data!.docs;
+                return LoginSuccess(listData: listData, firestore: firestore);
+                // return Admin(listData: listData, firestore: firestore);
+              } else {
+                return const Text('Empty data');
+              }
             }
-          }
-          return Text('State: ${snapshot.connectionState}');
-        },
+            return Text('State: ${snapshot.connectionState}');
+          },
+        ),
       ),
     );
   }
@@ -99,7 +107,7 @@ class LoginSuccess extends StatelessWidget {
             const Text(
               "Login",
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -108,7 +116,7 @@ class LoginSuccess extends StatelessWidget {
             ),
             Image.asset(
               'assets/login.png',
-              height: 100,
+              height: 150,
             ),
             const SizedBox(
               height: 20,

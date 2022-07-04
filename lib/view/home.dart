@@ -23,6 +23,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // leading:
+        backgroundColor: Colors.lightBlue[300],
         title: const Text("Kontroler"),
         centerTitle: true,
         actions: [
@@ -57,29 +58,37 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: StreamBuilder<DatabaseEvent>(
-        stream: starCountRef.onValue,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
-          } else if (snapshot.connectionState == ConnectionState.active ||
-              snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return const Error();
-            } else if (snapshot.hasData) {
-              var data = snapshot.data?.snapshot.value as Map;
-              return Sucess(
-                data: data,
-                starCountRef: starCountRef,
-                id: mac,
-              );
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: StreamBuilder<DatabaseEvent>(
+          stream: starCountRef.onValue,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Loading();
+            } else if (snapshot.connectionState == ConnectionState.active ||
+                snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Error();
+              } else if (snapshot.hasData) {
+                var data = snapshot.data?.snapshot.value as Map;
+                return Sucess(
+                  data: data,
+                  starCountRef: starCountRef,
+                  id: mac,
+                );
+              } else {
+                return const Text('Empty data');
+              }
             } else {
-              return const Text('Empty data');
+              return Text('State: ${snapshot.connectionState}');
             }
-          } else {
-            return Text('State: ${snapshot.connectionState}');
-          }
-        },
+          },
+        ),
       ),
     );
   }

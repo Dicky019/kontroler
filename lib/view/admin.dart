@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -65,6 +66,7 @@ class Admin extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // leading:
+        backgroundColor: Colors.lightBlue[300],
         title: const Text("Admin"),
         centerTitle: true,
         actions: [
@@ -99,30 +101,39 @@ class Admin extends StatelessWidget {
           ),
         ],
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: firestore.collection('mac').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
-          } else if (snapshot.connectionState == ConnectionState.active ||
-              snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return const Error();
-            } else if (snapshot.hasData) {
-              var listData = snapshot.data!.docs;
-              return AdminSuccess(listData: listData, firestore: firestore);
-            } else {
-              return const Text('Empty data');
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: firestore.collection('mac').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Loading();
+            } else if (snapshot.connectionState == ConnectionState.active ||
+                snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Error();
+              } else if (snapshot.hasData) {
+                var listData = snapshot.data!.docs;
+                return AdminSuccess(listData: listData, firestore: firestore);
+              } else {
+                return const Text('Empty data');
+              }
             }
-          }
-          return Text('State: ${snapshot.connectionState}');
-        },
+            return Text('State: ${snapshot.connectionState}');
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
+          backgroundColor: Colors.lightBlue[300],
           onPressed: () {
             addData(context);
-          }),
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }
@@ -235,6 +246,7 @@ class AdminSuccess extends StatelessWidget {
                 ),
                 trailing: Obx(
                   () => Checkbox(
+                    activeColor: Colors.lightBlue[300],
                     value: c.matikanSemua.value,
                     onChanged: (value) async {
                       c.matikanSemua.value = value ?? true;
@@ -254,10 +266,17 @@ class AdminSuccess extends StatelessWidget {
                 ),
               ),
             ListTile(
-              leading: const CircleAvatar(),
+              leading: CircleAvatar(
+                backgroundColor: Colors.lightBlue[300],
+                child: const Icon(
+                  CupertinoIcons.person,
+                  color: Colors.white,
+                ),
+              ),
               onTap: () async =>
                   await choised(context, data.id, data.data()['value']),
               trailing: Checkbox(
+                activeColor: Colors.lightBlue[300],
                 value: data.data()['isActive'],
                 onChanged: (value) async {
                   c.matikanSemua.value = false;
