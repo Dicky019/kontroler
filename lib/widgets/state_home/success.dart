@@ -19,8 +19,8 @@ class Sucess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future updateData(String key, bool isOn, int value) async {
-      await FirebaseDatabase.instance.ref().child(key).update({'isOn': isOn});
+    Future updateData(String key, bool isOn) async {
+      await FirebaseDatabase.instance.ref().update({key: isOn});
     }
 
     return Column(
@@ -53,11 +53,11 @@ class Sucess extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextSuhu(
-              dataSuhu: "${data['Temperatur_fan']['value']} %",
+              dataSuhu: "${data['Temperatur_fan']['value']} °C",
               title: 'Temperatur',
             ),
             TextSuhu(
-              dataSuhu: "${data['Humidity_lampu']['value']} °C",
+              dataSuhu: "${data['Humidity_lampu']['value']} %",
               title: 'Humidity',
             ),
           ],
@@ -67,26 +67,24 @@ class Sucess extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SwitchCostum(
-              value: data['Temperatur_fan']['isOn'],
+              value: data['Temperatur_fan_isOn'],
               onChanged: data['isClick']
                   ? (value) async {
                       await updateData(
-                        'Temperatur_fan',
+                        'Temperatur_fan_isOn',
                         value,
-                        data['Temperatur_fan']['value'],
                       );
                     }
                   : null,
               title: 'Fan',
             ),
             SwitchCostum(
-              value: data['Humidity_lampu']['isOn'],
+              value: data['Humidity_lampu_isOn'],
               onChanged: data['isClick']
                   ? (value) async {
                       await updateData(
-                        'Humidity_lampu',
+                        'Humidity_lampu_isOn',
                         value,
-                        data['Humidity_lampu']['value'],
                       );
                     }
                   : null,
@@ -98,13 +96,13 @@ class Sucess extends StatelessWidget {
         Center(
           child: data['isClick']
               ? ButtonOn(
-                  title: 'On',
+                  title: 'Manual',
                   onPressed: () async {
                     starCountRef.update({'isClick': !data['isClick']});
                   },
                 )
               : ButtonOff(
-                  title: 'Off',
+                  title: 'Otomatis',
                   onPressed: () async {
                     starCountRef.update({'isClick': !data['isClick']});
                   },
