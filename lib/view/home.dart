@@ -4,9 +4,9 @@ import 'package:firebase_database/firebase_database.dart';
 import '../view/login.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../widgets/state_home/success.dart';
-import '../widgets/state_home/error.dart';
-import '../widgets/state_home/loading.dart';
+import '../widgets/state/home/success.dart';
+import '../widgets/state/error.dart';
+import '../widgets/state/loading.dart';
 
 // ignore_for_file: use_build_context_synchronously
 class Home extends StatelessWidget {
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
                 return const Error();
               } else if (snapshot.hasData) {
                 var data = snapshot.data?.snapshot.value as Map;
-                return Sucess(
+                return HomeSucess(
                   data: data,
                   starCountRef: starCountRef,
                   id: mac,

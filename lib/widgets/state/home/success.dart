@@ -1,12 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-import '../button/button.dart';
-import 'error.dart';
-import '../text/text_suhu.dart';
+import '../../button/button.dart';
+import '../error.dart';
+import '../../text/text_suhu.dart';
 
-class Sucess extends StatelessWidget {
-  const Sucess({
+class HomeSucess extends StatelessWidget {
+  const HomeSucess({
     Key? key,
     required this.data,
     required this.starCountRef,
