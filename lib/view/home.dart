@@ -27,6 +27,7 @@ class Home extends StatelessWidget {
         title: const Text("Kontroler"),
         centerTitle: true,
         actions: [
+          // logout user
           IconButton(
             icon: const Icon(
               Icons.logout,
