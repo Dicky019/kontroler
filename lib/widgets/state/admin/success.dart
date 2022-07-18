@@ -45,6 +45,7 @@ class AdminSuccess extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
+              // button Cancel
               ButtonOff(
                 title: 'Cancel',
                 onPressed: () {
@@ -67,6 +68,7 @@ class AdminSuccess extends StatelessWidget {
             content: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // button to update
                 ButtonOff(
                   title: 'Edit Data',
                   onPressed: () {
@@ -75,6 +77,7 @@ class AdminSuccess extends StatelessWidget {
                     editData(context, id);
                   },
                 ),
+                // button delete
                 ButtonOff(
                   title: 'Delete Data',
                   onPressed: () async {
@@ -104,6 +107,7 @@ class AdminSuccess extends StatelessWidget {
         return Column(
           children: [
             if (index == 0)
+            // tombol matikan semua
               ListTile(
                 title: const Text(
                   "Matikan Semua",
@@ -130,6 +134,7 @@ class AdminSuccess extends StatelessWidget {
                   ),
                 ),
               ),
+              // tombol matikan salah satu
             ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.lightBlue[300],
