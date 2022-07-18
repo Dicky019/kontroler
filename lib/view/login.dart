@@ -121,6 +121,7 @@ class LoginSuccess extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+            // inputan mac
             TextFormField(
               controller: controllerMac,
               onChanged: (v) {
@@ -147,10 +148,11 @@ class LoginSuccess extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+            // button login
             ElevatedButton(
               onPressed: () async {
                 if (dataMac?.data() == null) {
-                  showDialogCustom("Anda Salah Mengisih Mac Addres");
+                  showDialogCustom("Mac Addres Tidak Terdaftar");
                 } else {
                   bool isLogin = dataMac?['isLogin'] ?? false;
                   bool isActive = dataMac?['isActive'] ?? false;

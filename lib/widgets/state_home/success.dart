@@ -36,6 +36,7 @@ class Sucess extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        // tampilan mac user yang terhubung
         Center(
           child: Text(
             "Mac $id",
@@ -52,10 +53,12 @@ class Sucess extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            // tampilan temperatur
             TextSuhu(
               dataSuhu: "${data['Temperatur_fan']['value']} °C",
               title: 'Temperatur',
             ),
+            // tampilan Humidity
             TextSuhu(
               dataSuhu: "${data['Humidity_lampu']['value']} %",
               title: 'Humidity',
@@ -66,6 +69,7 @@ class Sucess extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            // tombol kipas
             SwitchCostum(
               value: data['Temperatur_fan_isOn'],
               onChanged: data['isClick']
@@ -78,6 +82,7 @@ class Sucess extends StatelessWidget {
                   : null,
               title: 'Fan',
             ),
+            // tombol lampu
             SwitchCostum(
               value: data['Humidity_lampu_isOn'],
               onChanged: data['isClick']
@@ -95,13 +100,17 @@ class Sucess extends StatelessWidget {
         const Divider(thickness: 2),
         Center(
           child: data['isClick']
-              ? ButtonOn(
+              ? 
+              // tombol manual
+              ButtonOn(
                   title: 'Manual',
                   onPressed: () async {
                     starCountRef.update({'isClick': !data['isClick']});
                   },
                 )
-              : ButtonOff(
+              : 
+              // tombol otomatis
+              ButtonOff(
                   title: 'Otomatis',
                   onPressed: () async {
                     starCountRef.update({'isClick': !data['isClick']});

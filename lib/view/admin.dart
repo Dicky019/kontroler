@@ -21,6 +21,7 @@ class Admin extends StatelessWidget {
     final valueC = TextEditingController();
 
     Future<void> addData(BuildContext context) async {
+      // inputan mac
       Widget add = TextField(
         controller: valueC,
         decoration: const InputDecoration(hintText: "mac"),
@@ -33,6 +34,7 @@ class Admin extends StatelessWidget {
             title: const Text('Add Data'),
             content: add,
             actions: <Widget>[
+              // button add
               ButtonOff(
                 title: 'Add',
                 onPressed: () async {
@@ -153,6 +155,7 @@ class AdminSuccess extends StatelessWidget {
     final valueC = TextEditingController();
 
     Future<void> editData(BuildContext context, String id) async {
+      // update mac
       Widget add = TextField(
         controller: valueC,
         decoration: const InputDecoration(hintText: "mac"),
@@ -165,6 +168,7 @@ class AdminSuccess extends StatelessWidget {
             title: const Text('Edit Data'),
             content: add,
             actions: <Widget>[
+              // edit mac
               ButtonOff(
                 title: 'Edit',
                 onPressed: () async {
