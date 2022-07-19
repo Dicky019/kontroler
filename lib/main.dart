@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kontroler/view/admin.dart';
-import 'view/login.dart';
+import 'view/login_user.dart';
 import 'view/home.dart';
 
 void main() async {
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                   id: isLogin,
                   mac: mac ?? "",
                 ))
-          : const Login(),
+          : const LoginUser(),
     );
   }
 }

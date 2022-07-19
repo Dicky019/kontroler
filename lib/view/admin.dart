@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kontroler/model/mac_model.dart';
+import 'package:kontroler/view/login_admin.dart';
 
 import '../widgets/button/button.dart';
 import '../widgets/state/admin/success.dart';
 import '../widgets/state/loading.dart';
 import '../widgets/state/error.dart';
-import 'login.dart';
+import 'login_user.dart';
 
 class Admin extends StatelessWidget {
   final String id;
@@ -21,6 +22,7 @@ class Admin extends StatelessWidget {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     final valueC = TextEditingController();
 
+    // add data user
     Future<void> addData(BuildContext context) async {
       // inputan mac
       Widget add = TextField(
@@ -72,6 +74,7 @@ class Admin extends StatelessWidget {
         title: const Text("Admin"),
         centerTitle: true,
         actions: [
+          // logout admin
           IconButton(
             icon: const Icon(
               Icons.logout,
@@ -95,7 +98,7 @@ class Admin extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Login(),
+                  builder: (context) => const LoginAdmin(),
                 ),
                 (Route<dynamic> route) => false,
               );

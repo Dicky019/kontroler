@@ -19,6 +19,7 @@ class AdminSuccess extends StatelessWidget {
   Widget build(BuildContext context) {
     final valueC = TextEditingController();
 
+    // edit user
     Future<void> editData(BuildContext context, String id) async {
       // update mac
       Widget add = TextField(
@@ -59,6 +60,7 @@ class AdminSuccess extends StatelessWidget {
       );
     }
 
+    // pilihan ke edit atau hapus
     Future<void> choised(BuildContext context, String id, String value) async {
       return showDialog(
         context: context,
@@ -107,7 +109,7 @@ class AdminSuccess extends StatelessWidget {
         return Column(
           children: [
             if (index == 0)
-            // tombol matikan semua
+              // tombol matikan semua
               ListTile(
                 title: const Text(
                   "Matikan Semua",
@@ -134,7 +136,7 @@ class AdminSuccess extends StatelessWidget {
                   ),
                 ),
               ),
-              // tombol matikan salah satu
+            // tombol matikan salah satu
             ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.lightBlue[300],

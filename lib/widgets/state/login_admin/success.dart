@@ -3,13 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:kontroler/view/login_user.dart';
 
 import '../../../view/admin.dart';
-import '../../../view/home.dart';
 
-class LoginSuccess extends StatelessWidget {
-  const LoginSuccess({
+class LoginAdminSuccess extends StatelessWidget {
+  const LoginAdminSuccess({
     Key? key,
     required this.listData,
     required this.firestore,
@@ -62,7 +63,7 @@ class LoginSuccess extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Login",
+              "Login Admin",
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
@@ -93,7 +94,7 @@ class LoginSuccess extends StatelessWidget {
                 }
               },
               decoration: const InputDecoration(
-                labelText: 'Mac',
+                labelText: 'Name',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 ),
@@ -115,30 +116,32 @@ class LoginSuccess extends StatelessWidget {
                   bool isActive = dataMac?['isActive'] ?? false;
                   bool isAdmin = dataMac?['isAdmin'] ?? false;
                   if (isActive) {
-                    if (!isLogin) {
-                      await firestore.collection('mac').doc(dataMac!.id).update(
-                        {
-                          "isLogin": true,
-                        },
-                      );
-                      final box = GetStorage();
-                      box.write('isLogin', dataMac!.id);
-                      box.write('isAdmin', isAdmin);
-                      box.write('mac', dataMac!.data()['value']);
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => isAdmin
-                              ? Admin(id: dataMac!.id)
-                              : Home(
-                                  id: dataMac!.id,
-                                  mac: dataMac!.data()['value'],
-                                ),
-                        ),
-                        (Route<dynamic> route) => false,
-                      );
+                    if (isAdmin) {
+                      if (!isLogin) {
+                        await firestore
+                            .collection('mac')
+                            .doc(dataMac!.id)
+                            .update(
+                          {
+                            "isLogin": true,
+                          },
+                        );
+
+                        final box = GetStorage();
+                        box.write('isLogin', dataMac!.id);
+                        box.write('isAdmin', isAdmin);
+                        box.write('mac', dataMac!.data()['value']);
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Admin(id: dataMac!.id)),
+                          (Route<dynamic> route) => false,
+                        );
+                      } else {
+                        showDialogCustom("Anda Sudah Login");
+                      }
                     } else {
-                      showDialogCustom("Anda Sudah Login");
+                      showDialogCustom("Akun ini Adalah User");
                     }
                   } else {
                     showDialogCustom("Mac Anda Sudah Tidak Aktif");
@@ -151,7 +154,24 @@ class LoginSuccess extends StatelessWidget {
                 ),
                 child: Text("Login"),
               ),
-            )
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            const Divider(
+              thickness: 1.4,
+            ),
+            TextButton(
+                onPressed: () {
+                  Get.to(
+                    () => const LoginUser(),
+                    transition: Transition.fadeIn,
+                  );
+                },
+                child: const Text("To Login User")),
+            const Divider(
+              thickness: 1.4,
+            ),
           ],
         ),
       ),

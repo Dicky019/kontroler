@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import '../view/login.dart';
+import 'login_user.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../widgets/state/home/success.dart';
@@ -43,15 +43,12 @@ class Home extends StatelessWidget {
                 'isLogin',
               );
               box.remove(
-                'isAdmin',
-              );
-              box.remove(
                 'mac',
               );
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Login(),
+                  builder: (context) => const LoginUser(),
                 ),
                 (Route<dynamic> route) => false,
               );

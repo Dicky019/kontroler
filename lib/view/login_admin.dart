@@ -2,12 +2,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/state/login/success.dart';
+import '../widgets/state/login_admin/success.dart';
 import '../widgets/state/error.dart';
 import '../widgets/state/loading.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class LoginAdmin extends StatelessWidget {
+  const LoginAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class Login extends StatelessWidget {
                 return const Error();
               } else if (snapshot.hasData) {
                 var listData = snapshot.data!.docs;
-                return LoginSuccess(listData: listData, firestore: firestore);
+                return LoginAdminSuccess(listData: listData, firestore: firestore);
                 // return Admin(listData: listData, firestore: firestore);
               } else {
                 return const Text('Empty data');
@@ -46,9 +46,3 @@ class Login extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-// 04:e5:98:36:af:5c
