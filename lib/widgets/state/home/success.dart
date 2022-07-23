@@ -10,11 +10,9 @@ class HomeSucess extends StatelessWidget {
     Key? key,
     required this.data,
     required this.starCountRef,
-    required this.id,
   }) : super(key: key);
 
   final Map data;
-  final String id;
   final DatabaseReference starCountRef;
 
   @override
@@ -26,76 +24,34 @@ class HomeSucess extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 15,
-        ),
-        const Text(
-          "Hy User",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        // const SizedBox(
+        //   height: 15,
+        // ),
         // tampilan mac user yang terhubung
-        Center(
-          child: Text(
-            "Mac $id",
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.grey,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-        ),
+        
         const SizedBox(
           height: 15,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // tampilan temperatur
-            TextSuhu(
-              dataSuhu: "${data['Temperatur_fan']['value']} °C",
-              title: 'Temperatur',
-            ),
-            // tampilan Humidity
-            TextSuhu(
-              dataSuhu: "${data['Humidity_lampu']['value']} %",
-              title: 'Humidity',
-            ),
-          ],
+        Center(
+          child: TextSuhu(
+            dataSuhu: "${data['Humidity_lampu']['value']} %",
+            title: 'water level',
+          ),
         ),
         const Divider(thickness: 2),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // tombol kipas
-            SwitchCostum(
-              value: data['Temperatur_fan_isOn'],
-              onChanged: data['isClick']
-                  ? (value) async {
-                      await updateData(
-                        'Temperatur_fan_isOn',
-                        value,
-                      );
-                    }
-                  : null,
-              title: 'Fan',
-            ),
-            // tombol lampu
-            SwitchCostum(
-              value: data['Humidity_lampu_isOn'],
-              onChanged: data['isClick']
-                  ? (value) async {
-                      await updateData(
-                        'Humidity_lampu_isOn',
-                        value,
-                      );
-                    }
-                  : null,
-              title: 'Lampu',
-            ),
-          ],
+        Center(
+          child: SwitchCostum(
+            value: data['Humidity_lampu_isOn'],
+            onChanged: data['isClick']
+                ? (value) async {
+                    await updateData(
+                      'Humidity_lampu_isOn',
+                      value,
+                    );
+                  }
+                : null,
+            title: data['Humidity_lampu_isOn'] ? 'On' : "Off",
+          ),
         ),
         const Divider(thickness: 2),
         Center(

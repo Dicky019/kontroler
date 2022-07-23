@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Error extends StatelessWidget {
@@ -34,13 +35,16 @@ class SwitchCostum extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        const SizedBox(height: 6,),
         Transform.scale(
-          scale: 2.0,
-          child: Switch(
+          scale: 1.5,
+          child: CupertinoSwitch(
             value: value,
             onChanged: onChanged,
           ),
         ),
+        const SizedBox(height: 6,),
+        
       ],
     );
   }
