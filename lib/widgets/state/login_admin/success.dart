@@ -99,7 +99,7 @@ class LoginAdminSuccess extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 ),
                 prefixIcon: Icon(
-                  CupertinoIcons.macwindow,
+                  CupertinoIcons.person_alt_circle,
                 ),
               ),
             ),
